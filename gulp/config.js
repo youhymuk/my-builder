@@ -1,5 +1,10 @@
 module.exports = {
-  root: './build',
+  root: './dist',
 
-  autoprefixerConfig: ['last 3 version', '> 1%', 'ie 8', 'ie 9', 'Opera 12.1']
+  servTunnel: false,
+
+  autoprefixerConfig: {
+    browsers:['last 3 version', '> 1%', 'ie 8', 'ie 9', 'Opera 12.1'],
+    cascade: true
+  }
 };

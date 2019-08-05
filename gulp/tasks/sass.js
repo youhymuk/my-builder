@@ -2,12 +2,14 @@
 
 module.exports = function() {
   $.gulp.task('sass', function() {
-    return $.gulp.src('./source/style/app.scss')
+    return $.gulp.src('./src/style/**/*.scss')
       .pipe($.gp.sourcemaps.init())
       .pipe($.gp.sass()).on('error', $.gp.notify.onError({ title: 'Style' }))
-      .pipe($.gp.autoprefixer({ browsers: $.config.autoprefixerConfig }))
+      .pipe($.gp.autoprefixer($.config.autoprefixerConfig))
+      .pipe($.gp.csso({level: 2}))
       .pipe($.gp.sourcemaps.write())
-      .pipe($.gulp.dest($.config.root + '/assets/css'))
+      .pipe($.gp.rename({suffix: '.min'}))
+      .pipe($.gulp.dest($.config.root + '/css'))
       .pipe($.browserSync.stream());
   })
 };
